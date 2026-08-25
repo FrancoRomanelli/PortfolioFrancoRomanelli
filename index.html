@@ -41,7 +41,7 @@
 
   <div id="cursor-halo" class="hidden md:block"></div>
 
-  <!-- ================= LANGUAGE ================= -->
+  <!-- ================= LANGUAGE BAR ================= -->
   <div class="fixed top-0 inset-x-0 z-[60] h-8 bg-bg-900/95 border-b border-line backdrop-blur-md">
     <div class="max-w-6xl mx-auto px-6 h-full flex items-center justify-end">
       <button id="langToggle" class="flex items-center gap-2 font-mono text-[11px] text-slate-400 hover:text-white transition-colors" aria-label="Cambiar idioma / Change language">
@@ -72,7 +72,7 @@
         </button>
         <div id="cvDropdown"
           class="cv-dropdown absolute right-0 mt-2 w-44 rounded-md border border-line bg-bg-800 shadow-xl shadow-black/40 overflow-hidden">
-          <a href="/assets/cv/RequisitosdeCiberseguridad.pdf" target="_blank" rel="noopener"
+          <a href="#" target="_blank" rel="noopener"
             class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-mono text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors">
             🇪🇸 CV — Español
           </a>
@@ -96,7 +96,7 @@
         <a href="#contact" data-i18n="nav_contact" class="mob-link">Contacto</a>
         <div class="border-t border-line pt-4 flex flex-col gap-3">
           <span data-i18n="cv_btn" class="text-slate-500 text-xs">Mira mi CV</span>
-          <a href="/assets/cv/RequisitosdeCiberseguridad.pdf" target="_blank" rel="noopener" class="mob-link">🇪🇸
+          <a href="#" target="_blank" rel="noopener" class="mob-link">🇪🇸
             Español</a>
           <a href="cv-en.pdf" target="_blank" rel="noopener" class="mob-link">🇬🇧 English</a>
         </div>
@@ -127,7 +127,7 @@
           proyectos.
         </p>
         <div class="reveal flex flex-wrap gap-3">
-          <a href="#"
+          <a href="https://www.linkedin.com/in/franco-romanelli-04817b348/" target="_blank"
             class="magnet inline-flex items-center gap-2 bg-bg-800 border border-line hover:border-primary/50 text-sm px-4 py-2.5 rounded-lg text-slate-200">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
               <path
@@ -135,7 +135,7 @@
             </svg>
             LinkedIn
           </a>
-          <a href="#"
+          <a href="https://github.com/FrancoRomanelli" target="_blank"
             class="magnet inline-flex items-center gap-2 bg-bg-800 border border-line hover:border-primary/50 text-sm px-4 py-2.5 rounded-lg text-slate-200">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-slate-300">
               <path
@@ -143,6 +143,15 @@
             </svg>
             GitHub
           </a>
+          <button type="button" class="lang-toggle-btn magnet inline-flex items-center gap-2 bg-bg-800 border border-line hover:border-primary/50 text-sm px-4 py-2.5 rounded-lg text-slate-200" aria-label="Cambiar idioma / Change language">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-slate-300">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z" />
+            </svg>
+            <span data-lang-btn="es" class="lang-option active">ES</span>
+            <span class="text-slate-600">/</span>
+            <span data-lang-btn="en" class="lang-option">EN</span>
+          </button>
         </div>
       </div>
 
@@ -166,7 +175,7 @@
     </div>
   </section>
 
-  <!-- ================= ABOUT ================= -->
+  <!-- ================= ABOUT + STACK ================= -->
   <section id="about" class="relative py-24 border-t border-line">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-14">
       <div class="reveal">
@@ -252,8 +261,8 @@
     <div class="max-w-6xl mx-auto px-6">
       <p class="reveal font-mono text-xs text-secondary/80 mb-3 text-center">// certifications.log</p>
       <h2 data-i18n="certs_title" class="reveal font-hanken font-800 text-3xl text-white mb-12 text-center">Certificaciones Académicas</h2>
-      <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto items-stretch">
-        <div class="reveal glow-card h-full flex flex-col border border-secondary/40 rounded-xl bg-bg-800/60 p-6">
+      <div class="flex flex-col gap-6 max-w-3xl mx-auto">
+        <div class="reveal glow-card border border-secondary/40 rounded-xl bg-bg-800/60 p-6">
           <div class="flex items-start gap-4">
             <div class="logo-slot w-14 h-14 shrink-0 rounded-xl bg-white flex items-center justify-center p-2 overflow-hidden ring-1 ring-secondary/30">
               <img src="/assets/imagenes/utu.png" alt="Logo UTU"
@@ -277,10 +286,10 @@
           </div>
         </div>
 
-        <div class="reveal glow-card h-full flex flex-col border border-primary/40 rounded-xl bg-bg-800/60 p-6">
+        <div class="reveal glow-card border border-primary/40 rounded-xl bg-bg-800/60 p-6">
           <div class="flex items-start gap-4">
             <div class="logo-slot w-14 h-14 shrink-0 rounded-xl bg-white flex items-center justify-center p-2 overflow-hidden ring-1 ring-primary/30">
-              <img src="/assets/imagenes/ude-x.png" alt="Logo UDE"
+              <img src="/assets/imagenes/ude-logo.jpg" alt="Logo UDE"
                 class="w-full h-full object-contain"
                 onerror="this.nextElementSibling.classList.remove('hidden');this.remove()">
               <span class="logo-fallback-text font-mono text-[10px] font-700 text-primary hidden">UDE</span>
@@ -308,7 +317,7 @@
     </div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
+  <!-- ================= CONTACT / FOOTER ================= -->
   <section id="contact" class="relative py-24 border-t border-line bg-bg-900/40">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <p class="reveal font-mono text-xs text-primary/70 mb-3">// contact.sh</p>
@@ -329,8 +338,8 @@
         Portfolio.</span></p>
       <div class="flex items-center gap-5 font-mono text-xs">
         <a href="mailto:francoromanelli1310@gmail.com" data-i18n="footer_email" class="hover:text-slate-300">Email</a>
-        <a href="#" class="hover:text-slate-300">LinkedIn</a>
-        <a href="#" class="hover:text-slate-300">GitHub</a>
+        <a href="https://www.linkedin.com/in/franco-romanelli-04817b348/" class="hover:text-slate-300" target="_blank">LinkedIn</a>
+        <a href="https://github.com/FrancoRomanelli" class="hover:text-slate-300" target="_blank">GitHub</a>
         <a href="#top" data-i18n="footer_top" class="text-secondary hover:text-secondary/80">Volver arriba ↑</a>
       </div>
     </div>

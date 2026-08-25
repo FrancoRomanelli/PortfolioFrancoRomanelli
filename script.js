@@ -55,13 +55,13 @@ function applyLanguage(lang) {
   try { localStorage.setItem('site-lang', lang); } catch (e) {}
 }
 
-const langToggle = document.getElementById('langToggle');
-if (langToggle) {
-  langToggle.addEventListener('click', () => {
+const langToggleBtns = document.querySelectorAll('#langToggle, .lang-toggle-btn');
+langToggleBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'es';
     applyLanguage(current === 'es' ? 'en' : 'es');
   });
-}
+});
 let savedLang = 'es';
 try { savedLang = localStorage.getItem('site-lang') || 'es'; } catch (e) {}
 applyLanguage(savedLang);
