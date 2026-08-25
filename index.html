@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Portfolio Web</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: { 950: '#05080f', 900: '#0a0f1c', 800: '#0d1420', 700: '#121a29' },
+            primary: { DEFAULT: '#0ea5e9', dim: '#0ea5e926' },
+            secondary: { DEFAULT: '#10b981', dim: '#10b98126' },
+            tertiary: { DEFAULT: '#de8712', dim: '#de871226' },
+            line: '#94a3b81f',
+          },
+          fontFamily: {
+            head: ['"Hanken Grotesk"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-bg-950 text-slate-200 font-body antialiased">
+
+  <div id="cursor-halo" class="hidden md:block"></div>
+
+  <!-- ================= LANGUAGE ================= -->
+  <div class="fixed top-0 inset-x-0 z-[60] h-8 bg-bg-900/95 border-b border-line backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-6 h-full flex items-center justify-end">
+      <button id="langToggle" class="flex items-center gap-2 font-mono text-[11px] text-slate-400 hover:text-white transition-colors" aria-label="Cambiar idioma / Change language">
+        <span data-lang-btn="es" class="lang-option active">🇪🇸 ES</span>
+        <span class="text-slate-700">/</span>
+        <span data-lang-btn="en" class="lang-option">🇬🇧 EN</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= NAV ================= -->
+  <header class="fixed top-8 inset-x-0 z-50 backdrop-blur-md bg-bg-950/70 border-b border-line">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#top" class="font-hanken font-800 text-lg tracking-tight text-white flex items-center gap-1">
+        <span class="text-primary">&gt;</span>Franco-Romanelli<span class="text-primary blink">_</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 font-mono text-[13px] text-slate-400">
+        <a href="#about" data-i18n="nav_about" class="nav-link active hover:text-white transition-colors">Sobre Mi</a>
+        <a href="#stack" data-i18n="nav_skills" class="nav-link hover:text-white transition-colors">Skills</a>
+        <a href="#certs" data-i18n="nav_certs" class="nav-link hover:text-white transition-colors">Certificaciones</a>
+        <a href="#contact" data-i18n="nav_contact" class="nav-link hover:text-white transition-colors">Contacto</a>
+      </nav>
+      <div class="relative hidden md:block" id="cvDropdownWrap">
+        <button id="cvDropdownBtn"
+          class="magnet inline-flex items-center gap-2 border border-primary/40 text-primary text-[13px] font-mono px-4 py-2 rounded-md hover:bg-primary/10"
+          aria-haspopup="true" aria-expanded="false">
+          <span data-i18n="cv_btn">Mira mi CV</span> <span id="cvChevron" class="transition-transform">↓</span>
+        </button>
+        <div id="cvDropdown"
+          class="cv-dropdown absolute right-0 mt-2 w-44 rounded-md border border-line bg-bg-800 shadow-xl shadow-black/40 overflow-hidden">
+          <a href="/assets/cv/RequisitosdeCiberseguridad.pdf" target="_blank" rel="noopener"
+            class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-mono text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors">
+            🇪🇸 CV — Español
+          </a>
+          <a href="cv-en.pdf" target="_blank" rel="noopener"
+            class="flex items-center gap-2 px-4 py-2.5 text-[13px] font-mono text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors border-t border-line">
+            🇬🇧 CV — English
+          </a>
+        </div>
+      </div>
+      <button id="menuBtn" class="md:hidden text-slate-300" aria-label="Abrir menú" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobilePanel" class="mobile-panel md:hidden border-t border-line bg-bg-950/95">
+      <div class="px-6 py-4 flex flex-col gap-4 font-mono text-sm text-slate-300">
+        <a href="#about" data-i18n="nav_about" class="mob-link">Sobre Mi</a>
+        <a href="#stack" data-i18n="nav_skills" class="mob-link">Skills</a>
+        <a href="#certs" data-i18n="nav_certs" class="mob-link">Certificaciones</a>
+        <a href="#contact" data-i18n="nav_contact" class="mob-link">Contacto</a>
+        <div class="border-t border-line pt-4 flex flex-col gap-3">
+          <span data-i18n="cv_btn" class="text-slate-500 text-xs">Mira mi CV</span>
+          <a href="/assets/cv/RequisitosdeCiberseguridad.pdf" target="_blank" rel="noopener" class="mob-link">🇪🇸
+            Español</a>
+          <a href="cv-en.pdf" target="_blank" rel="noopener" class="mob-link">🇬🇧 English</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="top" class="relative pt-44 pb-28 md:pt-52 md:pb-36 overflow-hidden">
+    <canvas id="netCanvas" class="absolute inset-0 w-full h-full opacity-70"></canvas>
+    <div class="absolute inset-0 grid-tex"></div>
+    <div class="relative max-w-6xl mx-auto px-6 grid md:grid-cols-[1.15fr_.85fr] gap-16 items-center">
+      <div>
+        <div
+          class="reveal inline-flex items-center gap-2 font-mono text-xs text-secondary border border-secondary/30 bg-secondary/5 rounded-full px-3 py-1.5 mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary pulse-dot"></span>
+          ready_to_deploy
+        </div>
+        <h1 class="reveal font-hanken font-900 text-white leading-[0.95] text-6xl md:text-8xl tracking-tight mb-6">
+          <span id="decrypt-text">PORTFOLIO</span><span class="text-primary">.</span>
+        </h1>
+        <p data-i18n="hero_role" class="reveal font-hanken font-700 text-xl md:text-2xl text-slate-200 mb-5">
+          Full&nbsp;Stack — Estudiante de Ciberseguridad
+        </p>
+        <p data-i18n="hero_desc" class="reveal text-slate-400 leading-relaxed max-w-md mb-8">
+          Soy Franco Romanelli, estudiante del área tecnológica, interesado en seguir aprendiendo, desarrollar nuevas
+          habilidades y crecer profesionalmente dentro del mundo de la tecnología, te invito a mirar mi perfil y
+          proyectos.
+        </p>
+        <div class="reveal flex flex-wrap gap-3">
+          <a href="#"
+            class="magnet inline-flex items-center gap-2 bg-bg-800 border border-line hover:border-primary/50 text-sm px-4 py-2.5 rounded-lg text-slate-200">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+              <path
+                d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+            </svg>
+            LinkedIn
+          </a>
+          <a href="#"
+            class="magnet inline-flex items-center gap-2 bg-bg-800 border border-line hover:border-primary/50 text-sm px-4 py-2.5 rounded-lg text-slate-200">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-slate-300">
+              <path
+                d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.79-.25.79-.55v-2c-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.17.08 1.78 1.2 1.78 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.3-.52-1.49.11-3.1 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.61.24 2.8.12 3.1.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.27 5.69.42.36.78 1.07.78 2.16v3.2c0 .3.21.66.8.55A10.53 10.53 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z" />
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal flex justify-center md:justify-end">
+        <div class="w-80 md:w-96">
+          <div class="photo-float relative">
+            <div class="photo-glow"></div>
+            <div id="photoTilt" class="relative rounded-2xl overflow-hidden aspect-square"
+              style="transform-style:preserve-3d">
+              <img src="/assets/imagenes/imagen2.jpeg" alt="Foto de perfil"
+                class="w-full h-full object-cover rounded-2xl">
+            </div>
+          </div>
+          <div class="flex items-center justify-between mt-3 font-mono text-[11px] text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>ACCESS:
+              GRANTED</span>
+            <span>ID_0x2F4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="relative py-24 border-t border-line">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-14">
+      <div class="reveal">
+        <p class="font-mono text-xs text-primary/70 mb-3">// about.sh</p>
+        <h2 class="font-hanken font-800 text-3xl text-white mb-6 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="1.8">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 21c0-4 3.5-6 8-6s8 2 8 6" />
+          </svg>
+          <span data-i18n="about_title">Sobre mí</span>
+        </h2>
+        <div class="space-y-4 text-slate-400 leading-relaxed border border-line rounded-xl bg-bg-800/60 p-6">
+          <p data-i18n="about_p1">Soy Franco Romanelli, egresado de Bachillerato Tecnológico en Informática y actualmente estudiante de la
+            Tecnicatura en Analista de Ciberseguridad en la Universidad de la Empresa (UDE).
+            cuento con conocimientos basico en tecnologías como HTML, CSS, Java,
+            JavaScript, MySQL, Git y Bash. Actualmente estoy enfocado en seguir ampliando mis conocimientos en el área
+            tecnológica, con especial interés en la ciberseguridad.
+            Me considero una persona comprometida, disciplinada y con una actitud orientada al aprendizaje constante.
+            Busco continuar adquiriendo experiencia, enfrentar nuevos desafíos y desarrollar progresivamente mis
+            habilidades para construir mi perfil profesional dentro del área tecnológica.
+          </p>
+          <p data-i18n="about_p2">Te invito a conocer las actividades que realizo en mi GitHub y unirte si quieres colaborar en algún
+            proyecto.</p>
+        </div>
+      </div>
+
+      <div id="stack" class="reveal">
+        <p class="font-mono text-xs text-secondary/80 mb-3">// stack.json</p>
+        <h3 class="font-hanken font-800 text-2xl text-white mb-6 flex items-center gap-2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.8">
+            <path d="M9 18l-6-6 6-6M15 6l6 6-6 6" />
+          </svg>
+          Tech Stack
+        </h3>
+        <div class="space-y-5">
+          <div class="skill" data-pct="80">
+            <div class="flex items-center justify-between mb-1.5 font-mono text-xs text-slate-300">
+              <span>HTML &amp; CSS</span><span class="opacity-60">80%</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-bg-700 overflow-hidden">
+              <div class="bar-fill h-full rounded-full bg-tertiary" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="skill" data-pct="75">
+            <div class="flex items-center justify-between mb-1.5 font-mono text-xs text-slate-300">
+              <span>JavaScript</span><span class="opacity-60">75%</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-bg-700 overflow-hidden">
+              <div class="bar-fill h-full rounded-full bg-tertiary" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="skill" data-pct="85">
+            <div class="flex items-center justify-between mb-1.5 font-mono text-xs text-slate-300">
+              <span>Java</span><span class="opacity-60">85%</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-bg-700 overflow-hidden">
+              <div class="bar-fill h-full rounded-full bg-primary" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="skill" data-pct="70">
+            <div class="flex items-center justify-between mb-1.5 font-mono text-xs text-slate-300">
+              <span>MySQL</span><span class="opacity-60">70%</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-bg-700 overflow-hidden">
+              <div class="bar-fill h-full rounded-full bg-primary" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="skill" data-pct="85">
+            <div class="flex items-center justify-between mb-1.5 font-mono text-xs text-slate-300">
+              <span>Git / GitHub</span><span class="opacity-60">85%</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-bg-700 overflow-hidden">
+              <div class="bar-fill h-full rounded-full bg-secondary" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CERTIFICATIONS ================= -->
+  <section id="certs" class="relative py-24 border-t border-line">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="reveal font-mono text-xs text-secondary/80 mb-3 text-center">// certifications.log</p>
+      <h2 data-i18n="certs_title" class="reveal font-hanken font-800 text-3xl text-white mb-12 text-center">Certificaciones Académicas</h2>
+      <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto items-stretch">
+        <div class="reveal glow-card h-full flex flex-col border border-secondary/40 rounded-xl bg-bg-800/60 p-6">
+          <div class="flex items-start gap-4">
+            <div class="logo-slot w-14 h-14 shrink-0 rounded-xl bg-white flex items-center justify-center p-2 overflow-hidden ring-1 ring-secondary/30">
+              <img src="/assets/imagenes/utu.png" alt="Logo UTU"
+                class="w-full h-full object-contain"
+                onerror="this.nextElementSibling.classList.remove('hidden');this.remove()">
+              <span class="logo-fallback-text font-mono text-[10px] font-700 text-secondary hidden">UTU</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-hanken font-700 text-white">UTU - Bachillerato Tecnologico</h3>
+              <p data-i18n="cert1_sub" class="font-mono text-[11px] text-secondary/80 mb-3">Instituto de tecnología en Montevideo</p>
+              <p data-i18n="cert1_desc" class="text-sm text-slate-400 leading-relaxed mb-4">Instituto de formación en informática y tecnología
+                ubicado en Montevideo. Ofrece cursos y carreras técnicas en programación, redes, diseño web y soporte,
+                con un enfoque práctico y orientado al mercado laboral.</p>
+              <div class="flex gap-2">
+                <span
+                  class="font-mono text-[11px] px-2 py-1 rounded bg-bg-700 text-slate-400 border border-line">Frontend</span>
+                <span
+                  class="font-mono text-[11px] px-2 py-1 rounded bg-bg-700 text-slate-400 border border-line">Backend</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal glow-card h-full flex flex-col border border-primary/40 rounded-xl bg-bg-800/60 p-6">
+          <div class="flex items-start gap-4">
+            <div class="logo-slot w-14 h-14 shrink-0 rounded-xl bg-white flex items-center justify-center p-2 overflow-hidden ring-1 ring-primary/30">
+              <img src="/assets/imagenes/ude-x.png" alt="Logo UDE"
+                class="w-full h-full object-contain"
+                onerror="this.nextElementSibling.classList.remove('hidden');this.remove()">
+              <span class="logo-fallback-text font-mono text-[10px] font-700 text-primary hidden">UDE</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-hanken font-700 text-white">UDE - Universidad de la Empresa</h3>
+              <p data-i18n="cert2_sub" class="font-mono text-[11px] text-primary/80 mb-3">institución de educación superior privada de Uruguay
+              </p>
+              <p data-i18n="cert2_desc" class="text-sm text-slate-400 leading-relaxed mb-4">Carrera terciaria orientada a formar profesionales
+                en el área de la ciberseguridad, con una formación teórico-práctica en protección de sistemas, análisis
+                de vulnerabilidades, pentesting, criptografía, informática forense y gestión de la seguridad de la
+                información. Prepara para identificar y analizar amenazas, evaluar riesgos y aplicar medidas de
+                seguridad en entornos tecnológicos.
+              </p>
+              <div class="flex gap-2">
+                <span
+                  class="font-mono text-[11px] px-2 py-1 rounded bg-bg-700 text-slate-400 border border-line">Pentesting</span>
+                <span data-i18n="cert2_tag2"
+                  class="font-mono text-[11px] px-2 py-1 rounded bg-bg-700 text-slate-400 border border-line">Seguridad Informática</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <section id="contact" class="relative py-24 border-t border-line bg-bg-900/40">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <p class="reveal font-mono text-xs text-primary/70 mb-3">// contact.sh</p>
+      <h2 data-i18n="contact_title" class="reveal font-hanken font-800 text-3xl md:text-4xl text-white mb-4">¿Charlamos?</h2>
+      <p data-i18n="contact_desc" class="reveal text-slate-400 mb-8">Abierto a oportunidades de práctica, colaboración en proyectos o simplemente
+        hablar de seguridad y código.</p>
+      <a href="mailto:francoromanelli1310@gmail.com"
+        class="reveal magnet inline-flex items-center gap-2 bg-primary text-bg-950 font-hanken font-700 px-6 py-3 rounded-lg hover:shadow-lg hover:shadow-primary/30">
+        <span data-i18n="contact_btn">Enviar un email</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="border-t border-line py-8">
+    <div
+      class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+      <p><span class="text-primary font-mono">SECURE_DEV</span> &nbsp;|&nbsp; <span data-i18n="footer_copy">© 2026 Cybersecurity &amp; Full Stack
+        Portfolio.</span></p>
+      <div class="flex items-center gap-5 font-mono text-xs">
+        <a href="mailto:francoromanelli1310@gmail.com" data-i18n="footer_email" class="hover:text-slate-300">Email</a>
+        <a href="#" class="hover:text-slate-300">LinkedIn</a>
+        <a href="#" class="hover:text-slate-300">GitHub</a>
+        <a href="#top" data-i18n="footer_top" class="text-secondary hover:text-secondary/80">Volver arriba ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
